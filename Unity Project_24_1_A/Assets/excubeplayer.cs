@@ -2,24 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class excubeplayer : MonoBehaviour
 {
    public Text TextUI = null;
    public int Count = 0;
-   public float Power = 100.0f;
+   public int Power = 100;
     public int Point = 0;
     public float checkTime = 0.0f;
+    public float checkEndTime = 30.0f;
     public Rigidbody m_Rigidbody;
-
     // Update is called once per frame
     void Update()
     {
 
-        checkTime += Time.deltaTime;
-        if (checkTime >= 1.0f)
+        checkEndTime -= Time.deltaTime;
+        if (checkEndTime <= 0)
         {
-            Point += 1;
-            checkTime = 0.0f;
+            PlayerPrefs.SetInt("Point", Point);
+            SceneManager.LoadScene("ResultScene");
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
