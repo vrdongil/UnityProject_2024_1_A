@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject CircleObject;
+    public GameObject[] CircleObject;
     public Transform genTransform;
     public float timeCheck;
     public bool isGen;
@@ -29,11 +29,19 @@ public class GameManager : MonoBehaviour
             timeCheck -= Time.deltaTime;
             if (timeCheck <= 0.0f)
             {
-                GameObject Temp = Instantiate(CircleObject);
+                int RandNumber = Random.Range(0, 3);
+                GameObject Temp = Instantiate(CircleObject[RandNumber]);
                 Temp.transform.position = genTransform.position;
                 isGen = true;
             }
         }
+    }
+
+    public void MergeObject(int index, Vector3 position)
+    {
+        GameObject Temp = Instantiate(CircleObject[index]);
+        Temp.transform.position = position;
+        Temp.GetComponent<CircleObject>().Used();
     }
 }
 
