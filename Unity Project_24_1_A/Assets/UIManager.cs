@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
    void OnDisable()
     {
         GameManager.OnPointChanged -= UpdatePointText;
-        GameManager.OnBestScoreChanged += UpdateBestScoreText;
+        GameManager.OnBestScoreChanged -= UpdateBestScoreText;
     }
 
     void UpdatePointText(int newPoint)
